@@ -34,9 +34,9 @@ template node["memcached"]["sysconfig_file"] do
   )
 
   notifies :restart, "service[memcached]"
-
-  only_if do
-    node["memcached"]["sysconfig_file"]
+  
+  not_if do
+    node["memcached"]["sysconfig_file"].empty?
   end
 end
 
@@ -51,9 +51,9 @@ template node["memcached"]["config_file"] do
   )
 
   notifies :restart, "service[memcached]"
-
-  only_if do
-    node["memcached"]["config_file"]
+  
+  not_if do
+    node["memcached"]["config_file"].empty?
   end
 end
 

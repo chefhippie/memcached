@@ -41,7 +41,7 @@ default["memcached"]["sysconfig_file"] = value_for_platform_family(
 default["memcached"]["config_file"] = value_for_platform_family(
   "debian" => "/etc/memcached.conf",
   "ubuntu" => "/etc/memcached.conf",
-  "suse" => false
+  "suse" => ""
 )
 
 default["memcached"]["user"] = value_for_platform_family(
@@ -51,8 +51,8 @@ default["memcached"]["user"] = value_for_platform_family(
 )
 
 default["memcached"]["group"] = value_for_platform_family(
-  "debian" => false,
-  "ubuntu" => false,
+  "debian" => "",
+  "ubuntu" => "",
   "suse" => "memcached"
 )
 

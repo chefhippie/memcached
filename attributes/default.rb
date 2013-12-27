@@ -17,38 +17,44 @@
 # limitations under the License.
 #
 
-case node["platform_family"]
-when "debian"
-  default["memcached"]["packages"] = %w(
+default["memcached"]["packages"] = value_for_platform_family(
+  "debian" => %w(
     memcached
     libmemcache-dev
-  )
-
-  default["memcached"]["sysconfig_file"] = "/etc/default/memcached"
-  default["memcached"]["config_file"] = "/etc/memcached.conf"
-  default["memcached"]["user"] = "nobody"
-  default["memcached"]["group"] = false
-when "ubuntu"
-  default["memcached"]["packages"] = %w(
+  ),
+  "ubuntu" => %w(
     memcached
     libmemcache-dev
-  )
-
-  default["memcached"]["sysconfig_file"] = "/etc/default/memcached"
-  default["memcached"]["config_file"] = "/etc/memcached.conf"
-  default["memcached"]["user"] = "nobody"
-  default["memcached"]["group"] = false
-when "suse"
-  default["memcached"]["packages"] = %w(
+  ),
+  "suse" => %w(
     memcached
     libmemcached-devel
   )
+)
 
-  default["memcached"]["sysconfig_file"] = "/etc/sysconfig/memcached"
-  default["memcached"]["config_file"] = ""
-  default["memcached"]["user"] = "memcached"
-  default["memcached"]["group"] = "memcached"
-end
+default["memcached"]["sysconfig_file"] = value_for_platform_family(
+  "debian" => "/etc/default/memcached",
+  "ubuntu" => "/etc/default/memcached",
+  "suse" => "/etc/sysconfig/memcached"
+)
+
+default["memcached"]["config_file"] = value_for_platform_family(
+  "debian" => "/etc/memcached.conf",
+  "ubuntu" => "/etc/memcached.conf",
+  "suse" => false
+)
+
+default["memcached"]["user"] = value_for_platform_family(
+  "debian" => "nobody",
+  "ubuntu" => "nobody",
+  "suse" => "memcached"
+)
+
+default["memcached"]["group"] = value_for_platform_family(
+  "debian" => false,
+  "ubuntu" => false,
+  "suse" => "memcached"
+)
 
 default["memcached"]["service_name"] = "memcached"
 default["memcached"]["listen"] = "127.0.0.1"

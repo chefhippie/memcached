@@ -22,10 +22,6 @@ default["memcached"]["packages"] = value_for_platform_family(
     memcached
     libmemcache-dev
   ),
-  "ubuntu" => %w(
-    memcached
-    libmemcache-dev
-  ),
   "suse" => %w(
     memcached
     libmemcached-devel
@@ -34,25 +30,21 @@ default["memcached"]["packages"] = value_for_platform_family(
 
 default["memcached"]["sysconfig_file"] = value_for_platform_family(
   "debian" => "/etc/default/memcached",
-  "ubuntu" => "/etc/default/memcached",
   "suse" => "/etc/sysconfig/memcached"
 )
 
 default["memcached"]["config_file"] = value_for_platform_family(
   "debian" => "/etc/memcached.conf",
-  "ubuntu" => "/etc/memcached.conf",
   "suse" => ""
 )
 
 default["memcached"]["user"] = value_for_platform_family(
   "debian" => "nobody",
-  "ubuntu" => "nobody",
   "suse" => "memcached"
 )
 
 default["memcached"]["group"] = value_for_platform_family(
   "debian" => "",
-  "ubuntu" => "",
   "suse" => "memcached"
 )
 
